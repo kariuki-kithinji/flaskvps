@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>flask-shell</title>
+</head>
+<body>
+  <div>
+    <div class=fakeMenu>
+        <div class="fakeButtons fakeClose"></div>
+        <div class="fakeButtons fakeMinimize"></div>
+        <div class="fakeButtons fakeZoom"></div>
+      </div>
+      <div class="fakeScreen">
+        <pre><output id="command"></output></pre>
+      </div>
+      
+        <table>
+           <tr>
+              <td ><label for="txte" class="line">{{path}}</label></td>
+              <td>#</td>
+              <td style="width: 80%;"><input type="text" name="txte" id="txtArea" style="overflow:hidden" autofocus class='console-input line4' onkeypress="onTestChange();" placeholder="Type command...">
+              </td>
+           </tr>
+        </table>
+        
+        
+      <script>
+        async function execute()
+        {
+          const command = document.getElementById("txtArea").value
+          document.getElementById('txtArea').value = ""
+          const res = await fetch("/execute/cmd."+command).then((response) => response.text())
+        .then((data) => 
+          document.getElementById('command').value = data);
+        }
+        function onTestChange() {
+            var key = window.event.keyCode;
+        
+            // If the user has pressed enter
+            if (key === 13) {
+                execute()
+                //document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+      
+      </script>
+  </div>
+</body>
+</html>
