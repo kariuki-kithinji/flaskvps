@@ -11,8 +11,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days = 7)
 
-#ui = FlaskUI(app, width=500, height=500) 
-
+##TODO 
+### add a ssh compatibility
 @app.route('/execute/cmd.<command>', methods=['POST', 'GET'])
 def execute(command):
     try:
